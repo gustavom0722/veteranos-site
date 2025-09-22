@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
     :root{
       --primary:#0b2a5b;
@@ -32,10 +33,20 @@
     .hero video,.hero img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1}
     .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:0}
     .hero .title{position:relative;color:#fff;z-index:1}
-    .hero h2{font-family:Oswald;font-size:48px;line-height:1.2;margin:0;text-transform:uppercase;}
+    .hero h2{font-family: 'Poppins', sans-serif;font-size:48px;line-height:1.2;margin:0;text-transform:uppercase;animation: fadeInUp 2s ease-out;}
     .hero h2 span{display:block;margin:8px 0;}
 
     footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
+    @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   </style>
 </head>
 <body>
@@ -80,3 +91,4 @@
 <!-- goleadores.html: Top scorers table -->
 <!-- cedula.html: Link to PDF download -->
 <!-- nosotros.html: Contact info, rules, bio -->
+
