@@ -1,176 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tabla General - Veteranos Soccer League</title>
-
-  <!-- Fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla General — Veteranos Soccer League</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #0b2a5b;
-      --accent: #d4af37;
-      --ink: #0f172a;
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f8fafc;
+      color: #0f172a;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Montserrat, Arial, sans-serif; color: var(--ink); background: #f8fafc; }
-    a { color: inherit; text-decoration: none; }
-
-    /* NAVBAR (same as index) */
-    .nav {
-      position: sticky; top: 0; z-index: 40;
-      background: #fff; border-bottom: 3px solid var(--accent);
-    }
-    .nav-inner {
-      max-width: 1200px; margin: auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 16px;
-    }
-    .brand h1 {
-      font-family: Oswald; font-size: 24px; color: var(--primary);
-      text-transform: uppercase; margin: 0;
-    }
-    .navlinks { display: flex; gap: 18px; font-weight: 600; font-size: 14px; }
-    .navlinks a { padding: 8px 10px; border-radius: 8px; }
-    .navlinks a:hover { background: #f1f5f9; }
-    .menu-toggle { display: none; font-size: 26px; cursor: pointer; background: none; border: none; }
-    @media (max-width: 768px) {
-      .navlinks {
-        display: none; flex-direction: column;
-        background: #fff; position: absolute; top: 60px; right: 0;
-        width: 200px; border-left: 3px solid var(--accent); border-bottom: 3px solid var(--accent);
-        padding: 10px;
-      }
-      .navlinks.active { display: flex; }
-      .menu-toggle { display: block; }
-    }
-
-    /* TABLE */
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 32px;
+    h1 {
       text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary);
+      color: #0b2a5b;
+      font-family: Oswald, sans-serif;
+      margin-bottom: 10px;
     }
-    .table-wrapper {
-      overflow-x: auto; /* Mobile scroll */
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      background: #fff;
+    p.note {
+      text-align: center;
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 20px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 16px;
-      min-width: 600px;
-    }
-    thead {
-      background: var(--primary);
-      color: #fff;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     th, td {
-      padding: 12px 16px;
+      border: 1px solid #ddd;
+      padding: 8px;
       text-align: center;
-      border-bottom: 1px solid #e2e8f0;
+      font-size: 14px;
     }
-    tbody tr:nth-child(even) {
-      background: #f9fafb;
+    th {
+      background: #0b2a5b;
+      color: white;
+      text-transform: uppercase;
+      font-size: 13px;
     }
-    tbody tr:hover {
+    tr:nth-child(even) {
       background: #f1f5f9;
     }
-    td:first-child, th:first-child {
-      font-weight: bold;
-    }
-
-    footer {
-      padding: 20px 16px;
-      border-top: 3px solid var(--accent);
-      text-align: center;
-      color: #64748b;
-      margin-top: 40px;
+    tr:hover {
+      background: #e2e8f0;
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <div class="nav">
-    <div class="nav-inner">
-      <div class="brand"><h1>Veteranos Soccer League</h1></div>
-      <button class="menu-toggle" id="menu-toggle">☰</button>
-      <nav class="navlinks" id="navlinks">
-        <a href="index.html">Inicio</a>
-        <a href="tabla.html">Tabla</a>
-        <a href="horario.html">Horario de Partidos</a>
-        <a href="resultados.html">Resultados</a>
-        <a href="goleadores.html">Goleadores</a>
-        <a href="cedula.html">Cédula</a>
-        <a href="nosotros.html">Nosotros</a>
-      </nav>
-    </div>
-  </div>
-
-  <!-- TABLE CONTENT -->
-  <div class="container">
-    <h2>Tabla General</h2>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Pos</th>
-            <th>Equipo</th>
-            <th>JJ</th>
-            <th>JG</th>
-            <th>JE</th>
-            <th>JP</th>
-            <th>Pts</th>
-          </tr>
-        </thead>
-       <tbody>
-  <tr><td>1</td><td>San Lorenzo FC</td><td>10</td><td>8</td><td>1</td><td>1</td><td>25</td></tr>
-  <tr><td>2</td><td>Monarcas</td><td>10</td><td>7</td><td>2</td><td>1</td><td>23</td></tr>
-  <tr><td>3</td><td>Los Amigos</td><td>10</td><td>6</td><td>2</td><td>2</td><td>20</td></tr>
-  <tr><td>4</td><td>Deportivo OC</td><td>10</td><td>6</td><td>1</td><td>3</td><td>19</td></tr>
-  <tr><td>5</td><td>FC Bomo</td><td>10</td><td>5</td><td>2</td><td>3</td><td>17</td></tr>
-  <tr><td>6</td><td>Santos Laguna</td><td>10</td><td>5</td><td>1</td><td>4</td><td>16</td></tr>
-  <tr><td>7</td><td>Nuevo Guerrero</td><td>10</td><td>4</td><td>2</td><td>4</td><td>14</td></tr>
-  <tr><td>8</td><td>Rayados de Tonala</td><td>10</td><td>3</td><td>3</td><td>4</td><td>12</td></tr>
-  <tr><td>9</td><td>ASR OC</td><td>10</td><td>3</td><td>2</td><td>5</td><td>11</td></tr>
-  <tr><td>10</td><td>FC Legions</td><td>10</td><td>2</td><td>3</td><td>5</td><td>9</td></tr>
-  <tr><td>11</td><td>Acambaro</td><td>10</td><td>2</td><td>2</td><td>6</td><td>8</td></tr>
-  <tr><td>12</td><td>Perritos FC</td><td>10</td><td>1</td><td>1</td><td>8</td><td>4</td></tr>
-  <!-- Newly added teams -->
-  <tr><td>13</td><td>Colo-Colo</td><td>10</td><td>3</td><td>1</td><td>6</td><td>10</td></tr>
-  <tr><td>14</td><td>Grove FC</td><td>10</td><td>2</td><td>2</td><td>6</td><td>8</td></tr>
-  <tr><td>15</td><td>Deportivo Cuautla</td><td>10</td><td>2</td><td>2</td><td>6</td><td>8</td></tr>
-  <tr><td>16</td><td>Dvo. Juarez</td><td>10</td><td>2</td><td>1</td><td>7</td><td>7</td></tr>
-  <tr><td>17</td><td>Dvo. Tejaro</td><td>10</td><td>1</td><td>2</td><td>7</td><td>5</td></tr>
-  <tr><td>18</td><td>Dvo. Inter</td><td>10</td><td>1</td><td>1</td><td>8</td><td>4</td></tr>
-</tbody>
-      </table>
-    </div>
-  </div>
-
-  <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const menuToggle = document.getElementById("menu-toggle");
-    const navlinks = document.getElementById("navlinks");
-    menuToggle.addEventListener("click", () => {
-      navlinks.classList.toggle("active");
-    });
-  </script>
+  <h1>Tabla General</h1>
+  <p class="note">Criterios de desempate: PTS → DIF → GF → Resultados entre equipos (similar a Premier League)</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Pos</th>
+        <th>Equipo</th>
+        <th>PJ</th>
+        <th>G</th>
+        <th>E</th>
+        <th>P</th>
+        <th>GF</th>
+        <th>GC</th>
+        <th>DIF</th>
+        <th>PTS</th>
+        <th>PTS Reales</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>San Lorenzo FC</td><td>10</td><td>8</td><td>1</td><td>1</td><td>25</td><td>10</td><td>+15</td><td>25</td><td>-</td></tr>
+      <tr><td>2</td><td>Monarcas</td><td>10</td><td>7</td><td>2</td><td>1</td><td>22</td><td>12</td><td>+10</td><td>23</td><td>-</td></tr>
+      <tr><td>3</td><td>Los Amigos</td><td>10</td><td>6</td><td>2</td><td>2</td><td>20</td><td>14</td><td>+6</td><td>20</td><td>-</td></tr>
+      <tr><td>4</td><td>Deportivo OC</td><td>10</td><td>6</td><td>1</td><td>3</td><td>18</td><td>12</td><td>+6</td><td>19</td><td>-</td></tr>
+      <tr><td>5</td><td>FC Bomo</td><td>10</td><td>5</td><td>2</td><td>3</td><td>17</td><td>13</td><td>+4</td><td>17</td><td>-</td></tr>
+      <tr><td>6</td><td>Santos Laguna</td><td>10</td><td>5</td><td>1</td><td>4</td><td>16</td><td>15</td><td>+1</td><td>16</td><td>-</td></tr>
+      <tr><td>7</td><td>Nuevo Guerrero</td><td>10</td><td>4</td><td>2</td><td>4</td><td>14</td><td>13</td><td>+1</td><td>14</td><td>-</td></tr>
+      <tr><td>8</td><td>Rayados de Tonala</td><td>10</td><td>3</td><td>3</td><td>4</td><td>15</td><td>17</td><td>-2</td><td>12</td><td>-</td></tr>
+      <tr><td>9</td><td>ASR OC</td><td>10</td><td>3</td><td>2</td><td>5</td><td>13</td><td>18</td><td>-5</td><td>11</td><td>-</td></tr>
+      <tr><td>10</td><td>FC Legions</td><td>10</td><td>2</td><td>3</td><td>5</td><td>14</td><td>19</td><td>-5</td><td>9</td><td>-</td></tr>
+      <tr><td>11</td><td>Acambaro</td><td>10</td><td>2</td><td>2</td><td>6</td><td>12</td><td>20</td><td>-8</td><td>8</td><td>-</td></tr>
+      <tr><td>12</td><td>Perritos FC</td><td>10</td><td>1</td><td>1</td><td>8</td><td>9</td><td>24</td><td>-15</td><td>4</td><td>-</td></tr>
+      <tr><td>13</td><td>Colo-Colo</td><td>10</td><td>3</td><td>1</td><td>6</td><td>14</td><td>21</td><td>-7</td><td>10</td><td>-</td></tr>
+      <tr><td>14</td><td>Grove FC</td><td>10</td><td>2</td><td>2</td><td>6</td><td>11</td><td>18</td><td>-7</td><td>8</td><td>-</td></tr>
+      <tr><td>15</td><td>Deportivo Cuautla</td><td>10</td><td>2</td><td>2</td><td>6</td><td>10</td><td>17</td><td>-7</td><td>8</td><td>-</td></tr>
+      <tr><td>16</td><td>Dvo. Juarez</td><td>10</td><td>2</td><td>1</td><td>7</td><td>12</td><td>20</td><td>-8</td><td>7</td><td>-</td></tr>
+      <tr><td>17</td><td>Dvo. Tejaro</td><td>10</td><td>1</td><td>2</td><td>7</td><td>9</td><td>18</td><td>-9</td><td>5</td><td>-</td></tr>
+      <tr><td>18</td><td>Dvo. Inter</td><td>10</td><td>1</td><td>1</td><td>8</td><td>7</td><td>22</td><td>-15</td><td>4</td><td>-</td></tr>
+    </tbody>
+  </table>
 </body>
 </html>
-
