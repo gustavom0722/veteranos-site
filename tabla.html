@@ -1,99 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tabla General — Veteranos Soccer League</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Montserrat, Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f8fafc;
-      color: #0f172a;
+    :root {
+      --primary:#0b2a5b;
+      --accent:#d4af37;
+      --ink:#0f172a;
     }
-    h1 {
-      text-align: center;
-      color: #0b2a5b;
-      font-family: Oswald, sans-serif;
-      margin-bottom: 10px;
-    }
-    p.note {
-      text-align: center;
-      font-size: 14px;
-      color: #475569;
-      margin-bottom: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: auto;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-      font-size: 14px;
-    }
-    th {
-      background: #0b2a5b;
-      color: white;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
-    tr:nth-child(even) {
-      background: #f1f5f9;
-    }
-    tr:hover {
-      background: #e2e8f0;
-    }
+    body {margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:#f9fafb;}
+    a {color:inherit;text-decoration:none}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
+    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
+    .brand h1{font-family:Oswald;letter-spacing:1px;margin:0;font-size:20px;color:var(--primary);text-transform:uppercase}
+    .navlinks{display:flex;gap:18px;font-weight:600;font-size:14px}
+    .navlinks a{padding:8px 10px;border-radius:8px}
+    .navlinks a:hover{background:#f8fafc}
+
+    /* Table container */
+    .table-container {max-width:1100px;margin:40px auto;padding:0 16px}
+    h2 {text-align:center;color:var(--primary);margin-bottom:10px;}
+    .subtitle {text-align:center;font-size:14px;color:#64748b;margin-bottom:20px;}
+
+    table {width:100%;border-collapse:collapse;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);border-radius:8px;overflow:hidden;}
+    th, td {padding:10px;text-align:center;font-size:14px;border-bottom:1px solid #e5e7eb}
+    th {background:var(--primary);color:#fff;font-weight:600;}
+    td {color:#334155;}
+
+    /* Narrower equipo column */
+    td.equipo, th.equipo {text-align:left;width:180px;} /* shorter width */
+    tr:nth-child(even){background:#f9fafb}
+
+    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b;margin-top:40px}
   </style>
 </head>
 <body>
-  <h1>Tabla General</h1>
-  <p class="note">Criterios de desempate: PTS → DIF → GF → Resultados entre equipos (similar a Premier League)</p>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>Pos</th>
-        <th>Equipo</th>
-        <th>PJ</th>
-        <th>G</th>
-        <th>E</th>
-        <th>P</th>
-        <th>GF</th>
-        <th>GC</th>
-        <th>DIF</th>
-        <th>PTS</th>
-        <th>PTS Reales</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>San Lorenzo FC</td><td>10</td><td>8</td><td>1</td><td>1</td><td>25</td><td>10</td><td>+15</td><td>25</td><td>-</td></tr>
-      <tr><td>2</td><td>Monarcas</td><td>10</td><td>7</td><td>2</td><td>1</td><td>22</td><td>12</td><td>+10</td><td>23</td><td>-</td></tr>
-      <tr><td>3</td><td>Los Amigos</td><td>10</td><td>6</td><td>2</td><td>2</td><td>20</td><td>14</td><td>+6</td><td>20</td><td>-</td></tr>
-      <tr><td>4</td><td>Deportivo OC</td><td>10</td><td>6</td><td>1</td><td>3</td><td>18</td><td>12</td><td>+6</td><td>19</td><td>-</td></tr>
-      <tr><td>5</td><td>FC Bomo</td><td>10</td><td>5</td><td>2</td><td>3</td><td>17</td><td>13</td><td>+4</td><td>17</td><td>-</td></tr>
-      <tr><td>6</td><td>Santos Laguna</td><td>10</td><td>5</td><td>1</td><td>4</td><td>16</td><td>15</td><td>+1</td><td>16</td><td>-</td></tr>
-      <tr><td>7</td><td>Nuevo Guerrero</td><td>10</td><td>4</td><td>2</td><td>4</td><td>14</td><td>13</td><td>+1</td><td>14</td><td>-</td></tr>
-      <tr><td>8</td><td>Rayados de Tonala</td><td>10</td><td>3</td><td>3</td><td>4</td><td>15</td><td>17</td><td>-2</td><td>12</td><td>-</td></tr>
-      <tr><td>9</td><td>ASR OC</td><td>10</td><td>3</td><td>2</td><td>5</td><td>13</td><td>18</td><td>-5</td><td>11</td><td>-</td></tr>
-      <tr><td>10</td><td>FC Legions</td><td>10</td><td>2</td><td>3</td><td>5</td><td>14</td><td>19</td><td>-5</td><td>9</td><td>-</td></tr>
-      <tr><td>11</td><td>Acambaro</td><td>10</td><td>2</td><td>2</td><td>6</td><td>12</td><td>20</td><td>-8</td><td>8</td><td>-</td></tr>
-      <tr><td>12</td><td>Perritos FC</td><td>10</td><td>1</td><td>1</td><td>8</td><td>9</td><td>24</td><td>-15</td><td>4</td><td>-</td></tr>
-      <tr><td>13</td><td>Colo-Colo</td><td>10</td><td>3</td><td>1</td><td>6</td><td>14</td><td>21</td><td>-7</td><td>10</td><td>-</td></tr>
-      <tr><td>14</td><td>Grove FC</td><td>10</td><td>2</td><td>2</td><td>6</td><td>11</td><td>18</td><td>-7</td><td>8</td><td>-</td></tr>
-      <tr><td>15</td><td>Deportivo Cuautla</td><td>10</td><td>2</td><td>2</td><td>6</td><td>10</td><td>17</td><td>-7</td><td>8</td><td>-</td></tr>
-      <tr><td>16</td><td>Dvo. Juarez</td><td>10</td><td>2</td><td>1</td><td>7</td><td>12</td><td>20</td><td>-8</td><td>7</td><td>-</td></tr>
-      <tr><td>17</td><td>Dvo. Tejaro</td><td>10</td><td>1</td><td>2</td><td>7</td><td>9</td><td>18</td><td>-9</td><td>5</td><td>-</td></tr>
-      <tr><td>18</td><td>Dvo. Inter</td><td>10</td><td>1</td><td>1</td><td>8</td><td>7</td><td>22</td><td>-15</td><td>4</td><td>-</td></tr>
-    </tbody>
-  </table>
+  <!-- Navbar -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand"><h1>Veteranos Soccer League</h1></div>
+      <nav class="navlinks">
+        <a href="index.html">Inicio</a>
+        <a href="tabla.html">Tabla</a>
+        <a href="horario.html">Horario de Partidos</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="goleadores.html">Goleadores</a>
+        <a href="cedula.html">Cédula</a>
+        <a href="nosotros.html">Nosotros</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <h2>Tabla General</h2>
+    <div class="subtitle">Criterios de desempate: PTS → DIF → GF → Resultados entre equipos (similar a Premier League)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>POS</th>
+          <th class="equipo">EQUIPO</th>
+          <th>PJ</th>
+          <th>G</th>
+          <th>E</th>
+          <th>P</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DIF</th>
+          <th>PTS</th>
+          <th>PTS Reales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="equipo">San Lorenzo FC</td><td>10</td><td>8</td><td>1</td><td>1</td><td>25</td><td>10</td><td>+15</td><td>25</td><td>-</td></tr>
+        <tr><td>2</td><td class="equipo">Monarcas</td><td>10</td><td>7</td><td>2</td><td>1</td><td>22</td><td>12</td><td>+10</td><td>23</td><td>-</td></tr>
+        <tr><td>3</td><td class="equipo">Los Amigos</td><td>10</td><td>6</td><td>2</td><td>2</td><td>20</td><td>14</td><td>+6</td><td>20</td><td>-</td></tr>
+        <tr><td>4</td><td class="equipo">Deportivo OC</td><td>10</td><td>6</td><td>1</td><td>3</td><td>18</td><td>12</td><td>+6</td><td>19</td><td>-</td></tr>
+        <tr><td>5</td><td class="equipo">FC Bomo</td><td>10</td><td>5</td><td>2</td><td>3</td><td>17</td><td>13</td><td>+4</td><td>17</td><td>-</td></tr>
+        <tr><td>6</td><td class="equipo">Santos Laguna</td><td>10</td><td>5</td><td>1</td><td>4</td><td>16</td><td>15</td><td>+1</td><td>16</td><td>-</td></tr>
+        <tr><td>7</td><td class="equipo">Nuevo Guerrero</td><td>10</td><td>4</td><td>2</td><td>4</td><td>14</td><td>13</td><td>+1</td><td>14</td><td>-</td></tr>
+        <tr><td>8</td><td class="equipo">Rayados de Tonala</td><td>10</td><td>3</td><td>3</td><td>4</td><td>15</td><td>17</td><td>-2</td><td>12</td><td>-</td></tr>
+        <tr><td>9</td><td class="equipo">ASR OC</td><td>10</td><td>3</td><td>2</td><td>5</td><td>13</td><td>18</td><td>-5</td><td>11</td><td>-</td></tr>
+        <tr><td>10</td><td class="equipo">FC Legions</td><td>10</td><td>2</td><td>3</td><td>5</td><td>14</td><td>19</td><td>-5</td><td>9</td><td>-</td></tr>
+        <tr><td>11</td><td class="equipo">Acambaro</td><td>10</td><td>2</td><td>2</td><td>6</td><td>12</td><td>20</td><td>-8</td><td>8</td><td>-</td></tr>
+        <tr><td>12</td><td class="equipo">Perritos FC</td><td>10</td><td>1</td><td>1</td><td>8</td><td>9</td><td>24</td><td>-15</td><td>4</td><td>-</td></tr>
+        <tr><td>13</td><td class="equipo">Colo-Colo</td><td>10</td><td>3</td><td>1</td><td>6</td><td>14</td><td>21</td><td>-7</td><td>10</td><td>-</td></tr>
+        <tr><td>14</td><td class="equipo">Grove FC</td><td>10</td><td>2</td><td>2</td><td>6</td><td>11</td><td>18</td><td>-7</td><td>8</td><td>-</td></tr>
+        <tr><td>15</td><td class="equipo">Deportivo Cuautla</td><td>10</td><td>2</td><td>2</td><td>6</td><td>10</td><td>17</td><td>-7</td><td>8</td><td>-</td></tr>
+        <tr><td>16</td><td class="equipo">Dvo. Juarez</td><td>10</td><td>2</td><td>1</td><td>7</td><td>12</td><td>20</td><td>-8</td><td>7</td><td>-</td></tr>
+        <tr><td>17</td><td class="equipo">Dvo. Tejaro</td><td>10</td><td>1</td><td>2</td><td>7</td><td>9</td><td>18</td><td>-9</td><td>5</td><td>-</td></tr>
+        <tr><td>18</td><td class="equipo">Dvo. Inter</td><td>10</td><td>1</td><td>1</td><td>8</td><td>7</td><td>22</td><td>-15</td><td>4</td><td>-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
+
+  <script>
+    document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
 </body>
 </html>
