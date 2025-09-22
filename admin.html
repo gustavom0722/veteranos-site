@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Veteranos Soccer League (local)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#0b2a5b; --accent:#d4af37; --ink:#0f172a; --paper:#f8fafc;
+      --ok:#16a34a; --warn:#ca8a04; --muted:#64748b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
+    /* Top bar */
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .title{font-family:Oswald;text-transform:uppercase;color:var(--primary);letter-spacing:.5px}
+    .bar{display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+    .btn.alt{background:var(--accent);color:#111}
+    .btn.ghost{background:#eef2ff;color:var(--primary)}
+    .btn.red{background:#ef4444}
+    label.btn input{display:none}
+    /* Cards */
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 4px 14px rgba(2,6,23,.03);padding:16px;margin-bottom:16px}
+    .card h3{margin:0 0 10px 0;font-family:Oswald;color:var(--primary)}
+    .grid{display:grid;gap:12px}
+    @media(min-width:960px){ .grid-2{grid-template-columns:1.2fr 1fr} }
+    .row{display:grid;grid-template-columns:1.2fr 1.2fr .6fr .6fr;gap:10px}
+    .row2{display:grid;grid-template-columns:1fr;gap:10px}
+    input,select,textarea{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:10px;font:inherit}
+    .small{font-size:12px;color:var(--muted)}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#ecfeff;color:#0369a1;font-weight:700;font-size:12px}
+    .flex{display:flex;gap:10px;align-items:center}
+    .list{border-top:1px dashed #e5e7eb;padding-top:10px}
+    .hr{height:1px;background:#e5e7eb;margin:10px 0}
+    .ok{color:var(--ok)} .warn{color:var(--warn)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1 class="title">Panel Admin (local) — Veteranos Soccer League</h1>
+      <div class="bar">
+        <button class="btn" id="btnExport">Exportar JSON</button>
+        <label class="btn ghost" for="importFile">Importar JSON<input type="file" id="importFile" accept="application/json"></label>
+        <button class="btn alt" id="btnReset" title="Restaurar datos de ejemplo">Reset Demo</button>
+        <a class="btn" href="index.html">Ver sitio</a>
+      </div>
+    </div>
+
+    <!-- Teams -->
+    <div class="card">
+      <h3>Equipos</h3>
+      <p class="small">Escribe un equipo por línea. Esto llena los menús de los formularios.</p>
+      <textarea id="teamsInput" rows="6"></textarea>
+      <div class="flex">
+        <button class="btn" id="saveTeams">Guardar equipos</button>
+        <span class="small" id="teamsSaved"></span>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <!-- Results (Jornada) -->
+      <div class="card">
+        <h3>Agregar Resultados de una Jornada</h3>
+        <div class="row2">
+          <label>Fecha (Domingo)
+            <input type="date" id="dateInput">
+          </label>
+        </div>
+        <div id="matchRows" class="grid" style="gap:10px;margin-top:8px"></div>
+        <div class="flex" style="margin-top:8px">
+          <button class="btn" id="addMatch">Añadir Partido</button>
+          <button class="btn" id="saveRound">Guardar Jornada</button>
+        </div>
+        <p class="small">Formato de goleadores: <strong>Nombre (n)</strong> separados por coma. Ej: <em>Juan (2), Pedro (1)</em></p>
+        <div class="list" id="recentRounds"></div>
+      </div>
+
+      <!-- Fixtures -->
+      <div class="card">
+        <h3>Agregar Próximo Partido (Fixture)</h3>
+        <div class="grid" style="gap:10px">
+          <div class="row">
+            <select id="fxHome"></select>
+            <select id="fxAway"></select>
+            <input id="fxDate" type="date" />
+            <input id="fxTime" type="text" placeholder="Hora (opcional)">
+          </div>
+          <div class="row2">
+            <input id="fxLocation" type="text" placeholder="Lugar (ej. Memorial Park, Santa Ana)">
+            <input id="fxMap" type="url" placeholder="Link de mapa (Google Maps)">
+            <input id="fxAddress" type="text" placeholder="Dirección completa (se mostrará en sitio)">
+          </div>
+          <div class="flex">
+            <button class="btn" id="saveFixture">Guardar Fixture</button>
+            <span class="small" id="fixtureSaved"></span>
+          </div>
+        </div>
+        <div class="list" id="fixtureList"></div>
+      </div>
+    </div>
+
+    <!-- Data summary -->
+    <div class="card">
+      <h3>Resumen de Datos</h3>
+      <div id="summary"></div>
+      <div class="hr"></div>
+      <p class="small">Datos se guardan en tu navegador. “Exportar JSON” crea un archivo <code>vsl-data.json</code> para subirlo con el sitio cuando estemos listos.</p>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Data & storage ----------
+    const DEFAULT_DATA = {
+      teams: [
+        "Atlético Santa Ana","Real Veterans","FC Chapines",
+        "Club Michoacán","Los Guerreros","Santa Ana United"
+      ],
+      matches: [
+        {date:"2025-09-14",home:"Atlético Santa Ana",away:"Real Veterans",hs:2,as:1,
+         goals:[{player:"Juan Pérez",team:"Atlético Santa Ana",count:2},{player:"Luis",team:"Real Veterans",count:1}]}
+      ],
+      fixtures: [
+        {date:"2025-09-21",time:"10:00",home:"FC Chapines",away:"Club Michoacán",
+         location:"Memorial Park, Santa Ana",
+         address:"2102 S Flower St, Santa Ana, CA 92707",
+         map:"https://maps.google.com/?q=Memorial+Park+Santa+Ana"}
+      ]
+    };
+    const LS_KEY = "vsl-data";
+    function clone(o){ return JSON.parse(JSON.stringify(o)); }
+    function load(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)) || clone(DEFAULT_DATA);}catch(e){return clone(DEFAULT_DATA);} }
+    function save(){ localStorage.setItem(LS_KEY, JSON.stringify(DATA)); refresh(); }
+    let DATA = load();
+
+    // ---------- Utilities ----------
+    function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
+    function teamOptions(){ return DATA.teams.map(t=>`<option value="${t}">${t}</option>`).join(''); }
+    function parseGoals(txt){ // "Juan (2), Pedro (1)"
+      const out=[]; if(!txt || !txt.trim()) return out;
+      const items = txt.split(",").map(s=>s.trim()).filter(Boolean);
+      for(const it of items){ const m = it.match(/^(.+?)\\s*\\((\\d+)\\)$/); if(m){ out.push({player:m[1].trim(), team:"", count:parseInt(m[2])}); } }
+      return out;
+    }
+    function groupByDate(matches){
+      const map = new Map();
+      for(const m of matches){ if(!map.has(m.date)) map.set(m.date, []); map.get(m.date).push(m); }
+      return [...map.entries()].sort((a,b)=> a[0]<b[0]?1:-1);
+    }
+
+    // ---------- Teams ----------
+    const teamsInput = document.getElementById("teamsInput");
+    const teamsSaved = document.getElementById("teamsSaved");
+    function loadTeamsTextarea(){
+      teamsInput.value = DATA.teams.join("\\n");
+    }
+    document.getElementById("saveTeams").onclick = ()=>{
+      const list = teamsInput.value.split("\\n").map(s=>s.trim()).filter(Boolean);
+      if(!list.length){ alert("Agrega al menos un equipo."); return; }
+      DATA.teams = list;
+      save();
+      teamsSaved.textContent = "✔ Equipos guardados";
+      setTimeout(()=>teamsSaved.textContent="", 1500);
+      rebuildSelects();
+    };
+
+    function rebuildSelects(){
+      document.querySelectorAll("select.homeSel").forEach(s=> s.innerHTML = teamOptions());
+      document.querySelectorAll("select.awaySel").forEach(s=> s.innerHTML = teamOptions());
+      document.getElementById("fxHome").innerHTML = teamOptions();
+      document.getElementById("fxAway").innerHTML = teamOptions();
+    }
+
+    // ---------- Matches (Jornada) ----------
+    const dateInput = document.getElementById("dateInput");
+    const matchRows = document.getElementById("matchRows");
+    const recentRounds = document.getElementById("recentRounds");
+
+    function newMatchRow(){
+      const row = el(`<div class="row">
+        <select class="homeSel">${teamOptions()}</select>
+        <select class="awaySel">${teamOptions()}</select>
+        <input class="hs" type="number" min="0" placeholder="Goles Local">
+        <input class="as" type="number" min="0" placeholder="Goles Visita">
+        <div class="row2" style="grid-column:1/-1">
+          <textarea class="goals" rows="2" placeholder="Goleadores: Juan (2), Pedro (1)"></textarea>
+        </div>
+      </div>`);
+      const home = row.querySelector(".homeSel");
+      const away = row.querySelector(".awaySel");
+      home.addEventListener("change", ()=>{ if(home.value===away.value){ alert("Elige equipos distintos"); home.selectedIndex=0; }});
+      away.addEventListener("change", ()=>{ if(home.value===away.value){ alert("Elige equipos distintos"); away.selectedIndex=0; }});
+      return row;
+    }
+    document.getElementById("addMatch").onclick = ()=> matchRows.appendChild(newMatchRow());
+
+    document.getElementById("saveRound").onclick = ()=>{
+      const d = dateInput.value;
+      if(!d){ alert("Selecciona una fecha (domingo)."); return; }
+      const blocks = [...matchRows.children];
+      const newMatches=[];
+      for(const b of blocks){
+        const home=b.querySelector(".homeSel").value;
+        const away=b.querySelector(".awaySel").value;
+        const hs=parseInt(b.querySelector(".hs").value);
+        const as=parseInt(b.querySelector(".as").value);
+        if(!home || !away || Number.isNaN(hs) || Number.isNaN(as)) continue;
+        let goals = parseGoals(b.querySelector(".goals").value);
+        // Assign sides heuristically to match score:
+        let hLeft = hs, aLeft = as;
+        for(const g of goals){
+          if(!g.team){
+            if(hLeft>=aLeft && hLeft>0){ g.team = home; hLeft -= g.count; }
+            else if(aLeft>0){ g.team = away; aLeft -= g.count; }
+            else { g.team = home; }
+          }
+        }
+        newMatches.push({date:d, home, away, hs, as, goals});
+      }
+      if(!newMatches.length){ alert("No hay partidos válidos en la jornada."); return; }
+      DATA.matches.push(...newMatches);
+      save();
+      matchRows.innerHTML="";
+      dateInput.value="";
+      alert("✔ Jornada guardada (local).");
+      renderRecentRounds();
+    };
+
+    function renderRecentRounds(){
+      const grouped = groupByDate(DATA.matches).slice(0,3);
+      if(!grouped.length){ recentRounds.innerHTML = "<p class='small'>No hay resultados aún.</p>"; return; }
+      recentRounds.innerHTML = grouped.map(([date,list])=>`
+        <div style="padding:8px 0">
+          <span class="pill">${date}</span>
+          ${list.map(m=>`<div class="small"> ${m.home} <strong>${m.hs}-${m.as}</strong> ${m.away}
+            ${m.goals?.length?(" — Goles: "+m.goals.map(g=>`${g.player} (${g.count})`).join(", ")): ""}</div>`).join("")}
+        </div>`).join("");
+    }
+
+    // ---------- Fixtures ----------
+    const fxHome = document.getElementById("fxHome");
+    const fxAway = document.getElementById("fxAway");
+    const fxDate = document.getElementById("fxDate");
+    const fxTime = document.getElementById("fxTime");
+    const fxLocation = document.getElementById("fxLocation");
+    const fxMap = document.getElementById("fxMap");
+    const fxAddress = document.getElementById("fxAddress");
+    const fixtureSaved = document.getElementById("fixtureSaved");
+    const fixtureList = document.getElementById("fixtureList");
+
+    document.getElementById("saveFixture").onclick = ()=>{
+      if(!fxHome.value || !fxAway.value || !fxDate.value){ alert("Completa al menos equipos y fecha."); return; }
+      if(fxHome.value === fxAway.value){ alert("Elige equipos distintos."); return; }
+      DATA.fixtures.push({
+        date: fxDate.value, time: fxTime.value || "",
+        home: fxHome.value, away: fxAway.value,
+        location: fxLocation.value || "",
+        address: fxAddress.value || "",
+        map: fxMap.value || ""
+      });
+      save();
+      fxHome.selectedIndex = fxAway.selectedIndex = 0;
+      fxDate.value = fxTime.value = fxLocation.value = fxMap.value = fxAddress.value = "";
+      fixtureSaved.textContent = "✔ Fixture guardado";
+      setTimeout(()=>fixtureSaved.textContent="",1500);
+    };
+
+    function renderFixtures(){
+      if(!DATA.fixtures.length){ fixtureList.innerHTML = "<p class='small'>Sin próximos partidos.</p>"; return; }
+      fixtureList.innerHTML = DATA.fixtures
+        .slice()
+        .sort((a,b)=> a.date<b.date?-1:1)
+        .map(f=>`<div class="small" style="padding:6px 0;border-bottom:1px dashed #e5e7eb">
+          <strong>${f.date}${f.time?(" • "+f.time):""}</strong> — ${f.home} vs ${f.away}<br>
+          ${f.location?`Lugar: ${f.location}`:""} ${f.address?(" — "+f.address):""}
+          ${f.map?` — <a href="${f.map}" target="_blank">Mapa</a>`:""}
+        </div>`).join("");
+    }
+
+    // ---------- Export / Import / Reset ----------
+    document.getElementById("btnExport").onclick = ()=>{
+      const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "vsl-data.json"; a.click(); URL.revokeObjectURL(url);
+    };
+    document.getElementById("importFile").addEventListener("change", (e)=>{
+      const file = e.target.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        try{ DATA = JSON.parse(reader.result); save(); alert("✔ Datos importados."); }
+        catch(err){ alert("JSON inválido."); }
+      };
+      reader.readAsText(file);
+    });
+    document.getElementById("btnReset").onclick = ()=>{
+      if(confirm("Restaurar datos de ejemplo? Esto borra lo local.")){
+        localStorage.removeItem(LS_KEY);
+        DATA = clone(DEFAULT_DATA); save();
+      }
+    };
+
+    // ---------- Summary ----------
+    function renderSummary(){
+      const s = `
+        <div class="flex">
+          <div class="pill">Equipos: ${DATA.teams.length}</div>
+          <div class="pill">Resultados: ${DATA.matches.length}</div>
+          <div class="pill">Fixtures: ${DATA.fixtures.length}</div>
+        </div>`;
+      document.getElementById("summary").innerHTML = s;
+    }
+
+    // ---------- Init ----------
+    function refresh(){
+      loadTeamsTextarea();
+      rebuildSelects();
+      renderRecentRounds();
+      renderFixtures();
+      renderSummary();
+    }
+    // start with 3 empty rows ready
+    function addDefaultRows(n=3){ for(let i=0;i<n;i++) matchRows.appendChild(newMatchRow()); }
+    refresh(); addDefaultRows();
+  </script>
+</body>
+</html>
