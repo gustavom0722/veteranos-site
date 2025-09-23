@@ -58,15 +58,16 @@
     @keyframes slam { 
       0%{opacity:0;transform:scale(0.5) rotate(-10deg);} 
       60%{opacity:1;transform:scale(1.2) rotate(2deg);} 
-      100%{transform:scale(1) rotate(0);} 
+      100%{opacity:1;transform:scale(1) rotate(0);} 
     }
     .fade-in {animation:fadeIn 1.5s ease forwards;}
     .slam {animation:slam 0.8s ease forwards;}
     .delay-1 {animation-delay:1s;}
     .delay-2 {animation-delay:2s;}
     .delay-3 {animation-delay:3s;}
+    .delay-4 {animation-delay:4s;}
 
-    /* Custom font just for League name */
+    /* Custom font for League name */
     .vsl-text {
       font-family:'Abstraktes',sans-serif;
       text-shadow:2px 2px 6px rgba(0,0,0,0.5);
@@ -105,8 +106,10 @@
     <div class="title">
       <h2>
         <span class="fade-in delay-1">Bienvenidos a</span>
-        <span class="vsl-text slam delay-2">Veteranos Soccer League</span>
-        <span class="fade-in delay-3">Santa Ana, CA</span>
+        <span class="vsl-text slam delay-2">Veteranos</span>
+        <span class="vsl-text slam delay-3">Soccer</span>
+        <span class="vsl-text slam delay-4">League</span>
+        <span class="fade-in delay-4">Santa Ana, CA</span>
       </h2>
     </div>
   </header>
