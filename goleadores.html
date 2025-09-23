@@ -12,32 +12,37 @@
       --primary:#0b2a5b;
       --accent:#d4af37;
       --ink:#0f172a;
-      --paper:#f8fafc;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:#f8fafc;margin:0}
     a{color:inherit;text-decoration:none}
 
-    /* Nav */
-    .nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
-    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
-    .brand h1{font-family:Oswald;letter-spacing:1px;margin:0;font-size:24px;color:var(--primary);text-transform:uppercase}
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:3px solid var(--accent)}
+    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+    .brand h1{font-family:Oswald, sans-serif;letter-spacing:1px;margin:0;font-size:22px;color:var(--primary);text-transform:uppercase}
     .navlinks{display:flex;gap:18px;font-weight:600;font-size:14px}
-    .navlinks a{padding:8px 10px;border-radius:8px}
-    .navlinks a:hover{background:#f8fafc}
+    .navlinks a{padding:6px 8px;border-radius:6px}
+    .navlinks a:hover{background:#f1f5f9}
 
-    /* Section */
-    section{max-width:1200px;margin:40px auto;padding:0 16px}
-    .section-head h3{font-family:Oswald;margin:0 0 14px 0;font-size:28px;color:var(--primary);text-transform:uppercase;border-left:6px solid var(--accent);padding-left:10px}
+    /* Mobile menu */
+    .menu-toggle{display:none;cursor:pointer;font-weight:700;color:var(--primary);align-items:center;gap:6px}
+    .menu-toggle span{font-size:20px}
+    .navlinks-mobile{display:none;flex-direction:column;gap:12px;padding:12px 16px;background:#fff;border-top:2px solid var(--accent)}
+    @media(max-width:768px){
+      .navlinks{display:none}
+      .menu-toggle{display:flex}
+      .navlinks-mobile.show{display:flex}
+    }
 
-    /* Table */
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:20px}
-    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
-    th,td{padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:center}
-    thead th{background:var(--primary);color:#fff;font-weight:700;font-size:13px;text-transform:uppercase}
-    tbody tr:nth-child(odd){background:#fafafa}
+    main{max-width:900px;margin:40px auto;padding:0 16px}
+    h2{font-family:Oswald,sans-serif;color:var(--primary);margin-bottom:16px;text-align:center}
 
-    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    th,td{padding:12px 10px;text-align:center;border-bottom:1px solid #e2e8f0}
+    th{background:var(--primary);color:#fff;text-transform:uppercase;font-size:14px;letter-spacing:.5px}
+    tr:nth-child(even){background:#f1f5f9}
+    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b;margin-top:40px}
   </style>
 </head>
 <body>
@@ -46,7 +51,7 @@
     <div class="nav-inner">
       <div class="brand"><h1>Veteranos Soccer League</h1></div>
       <nav class="navlinks">
-        <a href="index.html">Home</a>
+        <a href="index.html">Inicio</a>
         <a href="tabla.html">Tabla</a>
         <a href="horario.html">Horario de Partidos</a>
         <a href="resultados.html">Resultados</a>
@@ -54,42 +59,66 @@
         <a href="cedula.html">Cédula</a>
         <a href="nosotros.html">Nosotros</a>
       </nav>
+      <div class="menu-toggle" onclick="document.querySelector('.navlinks-mobile').classList.toggle('show')">
+        <span>☰</span> Menu
+      </div>
     </div>
+    <nav class="navlinks-mobile">
+      <a href="index.html">Inicio</a>
+      <a href="tabla.html">Tabla</a>
+      <a href="horario.html">Horario de Partidos</a>
+      <a href="resultados.html">Resultados</a>
+      <a href="goleadores.html">Goleadores</a>
+      <a href="cedula.html">Cédula</a>
+      <a href="nosotros.html">Nosotros</a>
+    </nav>
   </div>
 
-  <!-- Goleadores Section -->
-  <section id="goleadores">
-    <div class="section-head"><h3>Tabla de Goleadores</h3></div>
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Jugador</th>
-            <th>Equipo</th>
-            <th>Goles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>Juan Pérez</td><td>Atlético Santa Ana</td><td>5</td></tr>
-          <tr><td>2</td><td>Luis Ramírez</td><td>Real Veterans</td><td>4</td></tr>
-          <tr><td>3</td><td>Pedro Gómez</td><td>Santa Ana United</td><td>4</td></tr>
-          <tr><td>4</td><td>José Hernández</td><td>Santa Ana United</td><td>3</td></tr>
-          <tr><td>5</td><td>Carlos Torres</td><td>Santa Ana United</td><td>3</td></tr>
-          <tr><td>6</td><td>Mario López</td><td>FC Chapines</td><td>2</td></tr>
-          <tr><td>7</td><td>Hugo Martínez</td><td>Los Guerreros</td><td>2</td></tr>
-          <tr><td>8</td><td>Omar Sánchez</td><td>Real Veterans</td><td>2</td></tr>
-          <tr><td>9</td><td>Daniel Rivera</td><td>FC Chapines</td><td>1</td></tr>
-          <tr><td>10</td><td>Fernando Cruz</td><td>Club Michoacán</td><td>1</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <!-- CONTENT -->
+  <main>
+    <h2>Tabla de Goleadores</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th>Jugador</th>
+          <th>Equipo</th>
+          <th>Goles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>San Lorenzo FC</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Carlos López</td>
+          <td>Monarcas</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Pedro Ramírez</td>
+          <td>Los Amigos</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Diego Torres</td>
+          <td>Deportivo OC</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Luis Sánchez</td>
+          <td>FC Bomo</td>
+          <td>7</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
 
-  <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
-
-  <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-  </script>
-</body>
-</html>
+  <footer>© <span id="y"></span> Veteranos Soccer League
