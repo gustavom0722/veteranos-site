@@ -12,29 +12,38 @@
       --primary:#0b2a5b;
       --accent:#d4af37;
       --ink:#0f172a;
-      --paper:#f8fafc;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:#f8fafc;margin:0}
+
     a{color:inherit;text-decoration:none}
 
-    /* Nav */
-    .nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
-    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
-    .brand h1{font-family:Oswald;letter-spacing:1px;margin:0;font-size:24px;color:var(--primary);text-transform:uppercase}
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:3px solid var(--accent)}
+    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+    .brand h1{font-family:Oswald, sans-serif;letter-spacing:1px;margin:0;font-size:22px;color:var(--primary);text-transform:uppercase}
+
     .navlinks{display:flex;gap:18px;font-weight:600;font-size:14px}
-    .navlinks a{padding:8px 10px;border-radius:8px}
-    .navlinks a:hover{background:#f8fafc}
+    .navlinks a{padding:6px 8px;border-radius:6px}
+    .navlinks a:hover{background:#f1f5f9}
 
-    /* Section */
-    section{max-width:1200px;margin:40px auto;padding:0 16px}
-    .section-head h3{font-family:Oswald;margin:0 0 14px 0;font-size:28px;color:var(--primary);text-transform:uppercase;border-left:6px solid var(--accent);padding-left:10px}
+    /* Mobile menu */
+    .menu-toggle{display:none;cursor:pointer;font-weight:700;color:var(--primary);align-items:center;gap:6px}
+    .menu-toggle span{font-size:20px}
+    .navlinks-mobile{display:none;flex-direction:column;gap:12px;padding:12px 16px;background:#fff;border-top:2px solid var(--accent)}
 
-    details{border:1px solid #e5e7eb;border-radius:12px;background:#fff;margin-bottom:10px;padding:10px}
-    summary{cursor:pointer;font-weight:600;font-family:Oswald;font-size:18px;color:var(--primary)}
-    .content{padding:8px 14px;font-size:14px;color:#444}
+    /* Show mobile */
+    @media(max-width:768px){
+      .navlinks{display:none}
+      .menu-toggle{display:flex}
+      .navlinks-mobile.show{display:flex}
+    }
 
-    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
+    main{max-width:1000px;margin:40px auto;padding:0 16px}
+    h2{font-family:Oswald,sans-serif;color:var(--primary);margin-bottom:12px}
+    .match{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:12px}
+    .match strong{color:var(--primary)}
+    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b;margin-top:40px}
   </style>
 </head>
 <body>
@@ -43,7 +52,7 @@
     <div class="nav-inner">
       <div class="brand"><h1>Veteranos Soccer League</h1></div>
       <nav class="navlinks">
-        <a href="index.html">Home</a>
+        <a href="index.html">Inicio</a>
         <a href="tabla.html">Tabla</a>
         <a href="horario.html">Horario de Partidos</a>
         <a href="resultados.html">Resultados</a>
@@ -51,38 +60,38 @@
         <a href="cedula.html">Cédula</a>
         <a href="nosotros.html">Nosotros</a>
       </nav>
+      <div class="menu-toggle" onclick="document.querySelector('.navlinks-mobile').classList.toggle('show')">
+        <span>☰</span> Menu
+      </div>
     </div>
+    <nav class="navlinks-mobile">
+      <a href="index.html">Inicio</a>
+      <a href="tabla.html">Tabla</a>
+      <a href="horario.html">Horario de Partidos</a>
+      <a href="resultados.html">Resultados</a>
+      <a href="goleadores.html">Goleadores</a>
+      <a href="cedula.html">Cédula</a>
+      <a href="nosotros.html">Nosotros</a>
+    </nav>
   </div>
 
-  <!-- Resultados Section -->
-  <section id="resultados">
-    <div class="section-head"><h3>Historial de Resultados</h3></div>
+  <!-- CONTENT -->
+  <main>
+    <h2>Resultados Recientes</h2>
 
-    <details>
-      <summary>Domingo 14 Sept 2025</summary>
-      <div class="content">
-        Atlético Santa Ana 2 - 1 Real Veterans<br>
-        Goleadores: Juan (Atlético) x2, Luis (Veterans)<br><br>
-        Santa Ana United 3 - 0 Club Michoacán<br>
-        Goleadores: Pedro (United), Carlos (United), José (United)<br><br>
-        FC Chapines 1 - 1 Los Guerreros<br>
-        Goleadores: Mario (Chapines), Hugo (Guerreros)
-      </div>
-    </details>
-
-    <details>
-      <summary>Domingo 7 Sept 2025</summary>
-      <div class="content">
-        Real Veterans 2 - 0 Club Michoacán<br>
-        Goleadores: Luis (Veterans), Omar (Veterans)<br><br>
-        Atlético Santa Ana 1 - 1 Los Guerreros<br>
-        Goleadores: Juan (Atlético), Hugo (Guerreros)<br><br>
-        Santa Ana United 4 - 2 FC Chapines<br>
-        Goleadores: Pedro (United) x2, José (United), Carlos (United), Mario (Chapines), Daniel (Chapines)
-      </div>
-    </details>
-
-  </section>
+    <div class="match">
+      <strong>San Lorenzo FC</strong> 2 – 1 <strong>Monarcas</strong> <br>
+      Goleadores: Juan (2) | Pedro (1)
+    </div>
+    <div class="match">
+      <strong>Los Amigos</strong> 3 – 3 <strong>Deportivo OC</strong> <br>
+      Goleadores: Luis (1), Mario (2) | Carlos (2), José (1)
+    </div>
+    <div class="match">
+      <strong>Santos Laguna</strong> 0 – 1 <strong>FC Bomo</strong> <br>
+      Goleadores: Diego (1)
+    </div>
+  </main>
 
   <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
 
