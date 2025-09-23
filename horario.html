@@ -8,36 +8,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
       --primary:#0b2a5b;
       --accent:#d4af37;
       --ink:#0f172a;
-      --paper:#f8fafc;
+      --light:#f9fafb;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:var(--paper)}
-    a{color:inherit;text-decoration:none}
+    * { box-sizing:border-box; }
+    body { margin:0; font-family: Montserrat, Arial, sans-serif; color: var(--ink); background:var(--light); }
+    a { color:inherit; text-decoration:none; }
 
     /* Nav */
-    .nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
-    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
-    .brand h1{font-family:Oswald;letter-spacing:1px;margin:0;font-size:24px;color:var(--primary);text-transform:uppercase}
-    .navlinks{display:flex;gap:18px;font-weight:600;font-size:14px}
-    .navlinks a{padding:8px 10px;border-radius:8px}
-    .navlinks a:hover{background:#f8fafc}
+    .nav { position:sticky; top:0; z-index:40; background:#fff; border-bottom:3px solid var(--accent); }
+    .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:8px 16px; }
+    .brand h1 { font-family:Oswald; letter-spacing:1px; margin:0; font-size:24px; color:var(--primary); text-transform:uppercase; }
+    .navlinks { display:flex; gap:18px; font-weight:600; font-size:14px; }
+    .navlinks a { padding:8px 10px; border-radius:8px; }
+    .navlinks a:hover { background:#f8fafc; }
 
-    /* Section */
-    section{max-width:1200px;margin:40px auto;padding:0 16px}
-    .section-head h3{font-family:Oswald;margin:0 0 14px 0;font-size:28px;color:var(--primary);text-transform:uppercase;border-left:6px solid var(--accent);padding-left:10px}
+    /* Menu wrapper for mobile */
+    .menu-wrapper { display:none; flex-direction:column; align-items:center; gap:2px; }
+    .menu-label { font-family:Oswald, sans-serif; font-size:14px; font-weight:600; color:var(--primary); }
+    .menu-toggle { font-size:22px; font-weight:bold; color:var(--primary); background:none; border:none; cursor:pointer; }
 
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:20px}
+    /* Schedule */
+    .schedule { max-width:1000px; margin:40px auto; background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:20px; }
+    h2 { text-align:center; font-family:Oswald, sans-serif; color:var(--primary); margin-bottom:10px; }
+    .date-label { text-align:center; font-weight:600; margin-bottom:20px; color:green; font-size:18px; }
 
-    .match{border-bottom:1px solid #e5e7eb;padding:10px 0}
-    .match:last-child{border-bottom:none}
-    .match strong{color:var(--primary)}
-    .small{font-size:14px;color:#64748b}
+    .location { background:var(--primary); color:#fff; font-weight:600; padding:8px; margin-top:20px; border-radius:4px; }
+    table { width:100%; border-collapse:collapse; margin-top:8px; font-size:14px; }
+    th, td { padding:10px 6px; border:1px solid #e2e8f0; text-align:center; }
+    th { background:#f1f5f9; font-size:13px; }
 
-    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
+    .note { background:yellow; font-size:12px; font-weight:600; padding:2px 6px; border-radius:3px; }
+
+    footer { padding:20px 16px; border-top:3px solid var(--accent); text-align:center; color:#64748b; margin-top:40px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navlinks {
+        display:none;
+        flex-direction:column;
+        gap:8px;
+        background:#fff;
+        padding:8px;
+        position:absolute;
+        top:60px;
+        right:16px;
+        border:1px solid var(--accent);
+        border-radius:6px;
+      }
+      .navlinks.active { display:flex; }
+      .menu-wrapper { display:flex; }
+      table { font-size:12px; }
+    }
   </style>
 </head>
 <body>
@@ -45,8 +70,13 @@
   <div class="nav">
     <div class="nav-inner">
       <div class="brand"><h1>Veteranos Soccer League</h1></div>
-      <nav class="navlinks">
-        <a href="index.html">Home</a>
+      <!-- Mobile Menu -->
+      <div class="menu-wrapper">
+        <div class="menu-label">Menu</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      </div>
+      <nav class="navlinks" id="navLinks">
+        <a href="index.html">Inicio</a>
         <a href="tabla.html">Tabla</a>
         <a href="horario.html">Horario de Partidos</a>
         <a href="resultados.html">Resultados</a>
@@ -57,32 +87,48 @@
     </div>
   </div>
 
-  <!-- Horario Section -->
-  <section id="horario">
-    <div class="section-head"><h3>Horario de Partidos</h3></div>
-    <div class="card">
-      <div class="match">
-        <p><strong>Domingo 21 Sept 2025</strong></p>
-        <p>Atlético Santa Ana vs FC Chapines</p>
-        <p class="small">Lugar: Memorial Park, Santa Ana — <a href="https://maps.google.com/?q=Memorial+Park+Santa+Ana" target="_blank">Ver mapa</a></p>
-      </div>
-      <div class="match">
-        <p><strong>Domingo 21 Sept 2025</strong></p>
-        <p>Real Veterans vs Los Guerreros</p>
-        <p class="small">Lugar: Santa Ana Stadium, 1234 Soccer Ave — <a href="https://maps.google.com/?q=Santa+Ana+Stadium" target="_blank">Ver mapa</a></p>
-      </div>
-      <div class="match">
-        <p><strong>Domingo 21 Sept 2025</strong></p>
-        <p>Santa Ana United vs Club Michoacán</p>
-        <p class="small">Lugar: Civic Center Field, Santa Ana — <a href="https://maps.google.com/?q=Civic+Center+Field+Santa+Ana" target="_blank">Ver mapa</a></p>
-      </div>
-    </div>
+  <!-- SCHEDULE -->
+  <section class="schedule">
+    <h2>Horarios</h2>
+    <div class="date-label">Domingo 09-21-2025</div>
+
+    <!-- Santa Anita Park -->
+    <div class="location">Santa Anita Park</div>
+    <table>
+      <thead>
+        <tr><th>Hora</th><th>Equipo A</th><th></th><th>Equipo B</th><th>Nota</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>8:00 AM</td><td>Monarcas</td><td>vs</td><td>Santos Laguna</td><td><span class="note">Semifinal T. Liga</span></td></tr>
+        <tr><td>9:15 AM</td><td>ASR OC</td><td>vs</td><td>Dvo. Juarez</td><td><span class="note">Final T.C.</span></td></tr>
+        <tr><td>10:45 AM</td><td>Nuevo Guerrero</td><td>vs</td><td>Los Amigos</td><td><span class="note">Semifinal T. Liga</span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Milla #1 -->
+    <div class="location">Milla #1</div>
+    <table>
+      <thead>
+        <tr><th>Hora</th><th>Equipo A</th><th></th><th>Equipo B</th><th>Nota</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>8:00 AM</td><td>Colo-Colo</td><td>vs</td><td>Deportivo OC</td><td></td></tr>
+        <tr><td>9:20 AM</td><td>Grove FC</td><td>vs</td><td>Dvo. Cuautla</td><td></td></tr>
+        <tr><td>10:40 AM</td><td>Rayados de Tonala</td><td>vs</td><td>San Lorenzo</td><td></td></tr>
+        <tr><td>12:00 PM</td><td>Dvo. Tejaro</td><td>vs</td><td>Dvo. Inter</td><td></td></tr>
+        <tr><td>1:20 PM</td><td>FC Bomo</td><td>vs</td><td>FC Legions</td><td></td></tr>
+        <tr><td>2:40 PM</td><td>Acambaro</td><td>vs</td><td>Perritos FC</td><td></td></tr>
+      </tbody>
+    </table>
   </section>
 
   <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
 
   <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
+    document.getElementById('y').textContent = new Date().getFullYear();
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
   </script>
 </body>
 </html>
