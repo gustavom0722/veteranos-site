@@ -6,80 +6,62 @@
   <title>Veteranos Soccer League — Santa Ana, CA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
       --primary:#0b2a5b;
       --accent:#d4af37;
       --ink:#0f172a;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
-
-    a{color:inherit;text-decoration:none}
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Montserrat, Arial, sans-serif; color: var(--ink); }
+    a { color:inherit; text-decoration:none; }
 
     /* Nav */
-    .nav{position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
-    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
-    .brand h1{font-family:Oswald, sans-serif;letter-spacing:1px;margin:0;font-size:24px;color:var(--primary);text-transform:uppercase}
-    .navlinks{display:flex;gap:18px;font-weight:600;font-size:14px}
-    .navlinks a{padding:8px 10px;border-radius:8px}
-    .navlinks a:hover{background:#f8fafc}
+    .nav { position:sticky; top:0; z-index:40; background:#fff; border-bottom:3px solid var(--accent); }
+    .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:8px 16px; }
+    .brand h1 { font-family:Oswald; letter-spacing:1px; margin:0; font-size:24px; color:var(--primary); text-transform:uppercase; }
+    .navlinks { display:flex; gap:18px; font-weight:600; font-size:14px; }
+    .navlinks a { padding:8px 10px; border-radius:8px; }
+    .navlinks a:hover { background:#f8fafc; }
 
-    /* Mobile menu button */
-    .menu-toggle {
-      display: none;
-      font-family: Oswald, sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--primary);
-      cursor: pointer;
-      border: none;
-      background: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .menu-toggle span {
-      font-size: 22px; /* hamburger size */
+    /* Menu wrapper for mobile */
+    .menu-wrapper { display:none; flex-direction:column; align-items:center; gap:2px; }
+    .menu-label { font-family:Oswald, sans-serif; font-size:14px; font-weight:600; color:var(--primary); }
+    .menu-toggle { font-size:22px; font-weight:bold; color:var(--primary); background:none; border:none; cursor:pointer; }
+
+    /* Hero */
+    .hero { position:relative; min-height:100vh; display:grid; place-items:center; text-align:center; overflow:hidden; }
+    .hero video, .hero img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; }
+    .hero::before { content:""; position:absolute; inset:0; background:rgba(0,0,0,.4); z-index:0; }
+    .hero .title { position:relative; color:#fff; z-index:1; }
+    .hero h2 { font-family:'Poppins', sans-serif; font-size:48px; line-height:1.2; margin:0; text-transform:uppercase; animation: fadeInUp 2s ease-out; }
+    .hero h2 span { display:block; margin:8px 0; }
+
+    footer { padding:20px 16px; border-top:3px solid var(--accent); text-align:center; color:#64748b; }
+
+    /* Keyframes */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
     }
 
     /* Responsive */
     @media (max-width: 768px) {
       .navlinks {
-        display: none;
-        flex-direction: column;
-        gap: 12px;
-        background: #fff;
-        padding: 12px;
-        border-top: 2px solid var(--accent);
+        display:none;
+        flex-direction:column;
+        gap:8px;
+        background:#fff;
+        padding:8px;
+        position:absolute;
+        top:60px; /* dropdown below header */
+        right:16px;
+        border:1px solid var(--accent);
+        border-radius:6px;
       }
-      .navlinks.active {
-        display: flex;
-      }
-      .menu-toggle {
-        display: flex;
-      }
-    }
-
-    /* Hero */
-    .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-    .hero video,.hero img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:0}
-    .hero .title{position:relative;color:#fff;z-index:1}
-    .hero h2{font-family: 'Poppins', sans-serif;font-size:48px;line-height:1.2;margin:0;text-transform:uppercase;animation: fadeInUp 2s ease-out;}
-    .hero h2 span{display:block;margin:8px 0;}
-
-    @media (max-width:768px){
-      .hero h2{font-size:28px}
-    }
-
-    footer{padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
+      .navlinks.active { display:flex; }
+      .menu-wrapper { display:flex; }
     }
   </style>
 </head>
@@ -88,10 +70,11 @@
   <div class="nav">
     <div class="nav-inner">
       <div class="brand"><h1>Veteranos Soccer League</h1></div>
-      <!-- Mobile Menu Button -->
-      <button class="menu-toggle" onclick="toggleMenu()">
-        <span>☰</span> Menu
-      </button>
+      <!-- Mobile Menu -->
+      <div class="menu-wrapper">
+        <div class="menu-label">Menu</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      </div>
       <nav class="navlinks" id="navLinks">
         <a href="index.html">Inicio</a>
         <a href="tabla.html">Tabla</a>
@@ -111,16 +94,19 @@
       <img src="soccer-bg.jpg" alt="Soccer background" />
     </video>
     <div class="title">
-      <h2><span>Bienvenidos a</span><span>Veteranos Soccer League</span><span>Santa Ana, CA</span></h2>
+      <h2>
+        <span>Bienvenidos a</span>
+        <span>Veteranos Soccer League</span>
+        <span>Santa Ana, CA</span>
+      </h2>
     </div>
   </header>
 
   <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
 
   <script>
-    document.getElementById('y').textContent=new Date().getFullYear();
-
-    function toggleMenu(){
+    document.getElementById('y').textContent = new Date().getFullYear();
+    function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('active');
     }
   </script>
