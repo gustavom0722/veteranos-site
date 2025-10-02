@@ -4,69 +4,65 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Veteranos Soccer League — Santa Ana, CA</title>
-  
-  <!-- Google Fonts (for other text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary:#0b2a5b;
       --accent:#d4af37;
       --ink:#0f172a;
     }
-    * {box-sizing:border-box}
-    body {margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
-    a {color:inherit;text-decoration:none}
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Montserrat, Arial, sans-serif; color: var(--ink); }
+    a { color:inherit; text-decoration:none; }
 
-    /* Import custom font */
-    @font-face {
-      font-family: 'GoldenVarsityOutline';
-      src: url('fonts/Golden Varsity Outline.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+    /* Nav */
+    .nav { position:sticky; top:0; z-index:40; background:#fff; border-bottom:3px solid var(--accent); }
+    .nav-inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:8px 16px; }
+    .brand h1 { font-family:Oswald; letter-spacing:1px; margin:0; font-size:24px; color:var(--primary); text-transform:uppercase; }
+    .navlinks { display:flex; gap:18px; font-weight:600; font-size:14px; }
+    .navlinks a { padding:8px 10px; border-radius:8px; }
+    .navlinks a:hover { background:#f8fafc; }
 
-    /* NAV */
-    .nav {position:sticky;top:0;z-index:40;background:#fff;border-bottom:3px solid var(--accent)}
-    .nav-inner {max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
-    .brand h1 {
-      font-family: 'GoldenVarsityOutline', Oswald, sans-serif;
-      letter-spacing:1px;
-      margin:0;
-      font-size:28px;
-      color:var(--primary);
-      text-transform:uppercase;
-    }
-    .navlinks {display:flex;gap:18px;font-weight:600;font-size:14px}
-    .navlinks a {padding:8px 10px;border-radius:8px}
-    .navlinks a:hover {background:#f8fafc}
+    /* Menu wrapper for mobile */
+    .menu-wrapper { display:none; flex-direction:column; align-items:center; gap:2px; }
+    .menu-label { font-family:Oswald, sans-serif; font-size:14px; font-weight:600; color:var(--primary); }
+    .menu-toggle { font-size:22px; font-weight:bold; color:var(--primary); background:none; border:none; cursor:pointer; }
 
     /* Hero */
-    .hero {position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-    .hero video,.hero img {position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-    .hero::before {content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:0}
-    .hero .title {position:relative;color:#fff;z-index:1;text-shadow:2px 2px 6px rgba(0,0,0,0.8)}
-    .hero h2 {font-family:'Poppins',sans-serif;font-size:48px;line-height:1.2;margin:0;text-transform:uppercase}
-    .hero h2 span {display:block;margin:8px 0;}
+    .hero { position:relative; min-height:100vh; display:grid; place-items:center; text-align:center; overflow:hidden; }
+    .hero video, .hero img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; }
+    .hero::before { content:""; position:absolute; inset:0; background:rgba(0,0,0,.4); z-index:0; }
+    .hero .title { position:relative; color:#fff; z-index:1; }
+    .hero h2 { font-family:'Poppins', sans-serif; font-size:48px; line-height:1.2; margin:0; text-transform:uppercase; animation: fadeInUp 2s ease-out; }
+    .hero h2 span { display:block; margin:8px 0; }
 
-    /* Animations */
-    @keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
-    @keyframes slam {
-      0% {opacity:0;transform:scale(0.5) rotate(-10deg);}
-      60% {opacity:1;transform:scale(1.2) rotate(2deg);}
-      100% {opacity:1;transform:scale(1) rotate(0);}
+    footer { padding:20px 16px; border-top:3px solid var(--accent); text-align:center; color:#64748b; }
+
+    /* Keyframes */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
     }
-    .fade-in {animation:fadeIn 0.8s ease forwards;}
-    .slam {animation:slam 0.5s ease forwards;}
-    .delay-1 {animation-delay:0.2s;}
-    .delay-2 {animation-delay:0.6s;}
-    .delay-3 {animation-delay:1s;}
-    .delay-4 {animation-delay:1.4s;}
 
-    footer {padding:20px 16px;border-top:3px solid var(--accent);text-align:center;color:#64748b}
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navlinks {
+        display:none;
+        flex-direction:column;
+        gap:8px;
+        background:#fff;
+        padding:8px;
+        position:absolute;
+        top:60px; /* dropdown below header */
+        right:16px;
+        border:1px solid var(--accent);
+        border-radius:6px;
+      }
+      .navlinks.active { display:flex; }
+      .menu-wrapper { display:flex; }
+    }
   </style>
 </head>
 <body>
@@ -74,19 +70,24 @@
   <div class="nav">
     <div class="nav-inner">
       <div class="brand"><h1>Veteranos Soccer League</h1></div>
-      <nav class="navlinks">
+      <!-- Mobile Menu -->
+      <div class="menu-wrapper">
+        <div class="menu-label">Menu</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      </div>
+      <nav class="navlinks" id="navLinks">
         <a href="index.html">Inicio</a>
         <a href="tabla.html">Tabla</a>
         <a href="horario.html">Horario de Partidos</a>
         <a href="resultados.html">Resultados</a>
         <a href="goleadores.html">Goleadores</a>
         <a href="cedula.html">Cédula</a>
-        <a href="sobrelaliga.html">Sobre la Liga</a>
+        <a href="nosotros.html">Nosotros</a>
       </nav>
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO with video -->
   <header id="home" class="hero">
     <video autoplay muted loop playsinline>
       <source src="assets/hero.mp4" type="video/mp4">
@@ -94,16 +95,20 @@
     </video>
     <div class="title">
       <h2>
-        <span class="fade-in delay-1">Bienvenidos a</span>
-        <span class="slam delay-2">Veteranos</span>
-        <span class="slam delay-3">Soccer</span>
-        <span class="slam delay-4">League</span>
-        <span class="fade-in delay-4">Santa Ana, CA</span>
+        <span>Bienvenidos a</span>
+        <span>Veteranos Soccer League</span>
+        <span>Santa Ana, CA</span>
       </h2>
     </div>
   </header>
 
   <footer>© <span id="y"></span> Veteranos Soccer League — Santa Ana, CA</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
